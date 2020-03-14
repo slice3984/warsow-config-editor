@@ -30,9 +30,15 @@ header {
 
   & ul {
     display: flex;
+    align-items: center;
     list-style: none;
+    font-size: 2rem;
 
-    & li:not(:last-child) {
+    & input {
+      display: none;
+    }
+
+    & label {
       margin-right: 1rem;
     }
 
