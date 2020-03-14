@@ -1,0 +1,1 @@
+# warsow-config-editor
