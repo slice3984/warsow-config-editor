@@ -8,6 +8,7 @@
 
 html {
   font-size: 62.5%;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
   height: 100%;
 }
 
@@ -23,6 +24,8 @@ header {
   justify-content: space-between;
   align-items: center;
   padding: 0.5rem 1rem;
+  background-color: $color-bg-darker;
+  color: $color-white;
 
   h1 {
     font-size: 2.5rem;
@@ -55,15 +58,16 @@ header {
   justify-content: space-between;
   flex-grow: 1;
   padding: 1rem;
+  font-size: 1.5rem;
+  color: $color-white;
+  background-color: $color-bg;
 
   &__left {
-    border: 1px solid #ccc;
     width: 80%;
     margin-right: 1rem;
   }
 
   &__right {
-    border: 1px solid #ccc;
     width: 20%;
   }
 }
@@ -78,30 +82,52 @@ header {
     display: flex;
     list-style: none;
     justify-content: space-around;
-    border: 1px solid #ccc;
+    background-color: $color-bg;
     font-size: 1.5rem;
 
     & li {
       cursor: pointer;
-      width: 50%;
+      background-color: $color-primary-2;
+      transform: skew(-40deg);
+      width: 46%;
       text-align: center;
       padding: 0.5rem;
-    }
 
-    & li:first-child {
-      border-right: 1px solid #ccc;
+      &:hover {
+        background-color: $color-primary-1;
+      }
     }
 
     & a {
+      display: block;
       text-decoration: none;
       font-size: 2rem;
+      color: $color-white;
+      font-weight: 700;
+      transform: skew(40deg);
     }
   }
+}
+
+.selected {
+  background-color: $color-primary-1 !important;
 }
 
 .heading-bindlist {
   text-align: center;
   font-size: 2rem;
   padding: 0.5rem;
-  border-bottom: 1px solid #ccc;
+}
+
+// Button style
+.btn {
+  padding: 0.5rem 1rem;
+  border-radius: 3px;
+  cursor: pointer;
+  color: $color-white;
+  background-color: $color-primary-2;
+
+  &:hover {
+    background-color: $color-primary-1;
+  }
 }
