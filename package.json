@@ -24,5 +24,8 @@
 		"parcel-bundler": "^1.12.4",
 		"sass": "^1.26.3",
 		"typescript": "^3.8.3"
+	},
+	"dependencies": {
+		"simple-keyboard": "^2.28.30"
 	}
 }

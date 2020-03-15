@@ -77,6 +77,38 @@ header {
   padding: 1rem;
 }
 
+.left-content {
+  &__input-area {
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+.legend {
+  &__color {
+    font-weight: 700;
+    padding: 1rem 1.5rem;
+    text-align: center;
+    border-radius: 3px;
+
+    &:not(:last-child) {
+      margin-bottom: 1rem;
+    }
+
+    &--1 {
+      background-color: $color-legend-1;
+    }
+    &--2 {
+      background-color: $color-legend-2;
+    }
+    &--3 {
+      background-color: $color-legend-3;
+    }
+  }
+}
+
 .editor-nav {
   & ul {
     display: flex;
@@ -130,4 +162,27 @@ header {
   &:hover {
     background-color: $color-primary-1;
   }
+}
+
+// Keyboard styles
+.hg-button {
+  color: $color-primary-2;
+  font-weight: 700;
+  background-color: $color-bg-darker !important;
+}
+
+.simple-keyboard,
+.hg-theme-default {
+  width: 80% !important;
+  margin-top: 3rem !important;
+  margin-right: 3rem;
+  background-color: $color-bg !important;
+}
+
+.red {
+  color: #f00;
+}
+
+.hg-button-space {
+  width: 80%;
 }
