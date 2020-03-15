@@ -24,22 +24,29 @@
         <div class="main__left">
             <nav class="editor-nav">
                 <ul>
-                    <li class="selected"><a href="#">Pane 1</a></li>
-                    <li><a href="#">Pane 2</a></li>
+                    <li class="selected" id="link-pane-1"><a href="#">Pane 1</a></li>
+                    <li id="link-pane-2"><a href="#">Pane 2</a></li>
                 </ul>
             </nav>
-            <div class="left-content">
-                <div class="left-content__input-area">
-                    <div class="simple-keyboard"></div>
-                    <div class="legend">
-                        <div class="legend__color legend__color--1">Text Chat</div>
-                        <div class="legend__color legend__color--2">Voice Chat</div>
-                        <div class="legend__color legend__color--3">Misc</div>
+            <div class="pane-1">
+                <div class="left-content">
+                    <div class="left-content__input-area">
+                        <div class="simple-keyboard"></div>
+                        <div class="legend">
+                            <div class="legend__color legend__color--1">Text Chat</div>
+                            <div class="legend__color legend__color--2">Voice Chat</div>
+                            <div class="legend__color legend__color--3">Misc</div>
+                        </div>
                     </div>
-                </div>
 
+                </div>
+            </div>
+
+            <div class="pane-2 hidden">
+                s
             </div>
         </div>
+
         <div class="main__right">
             <div class="heading-bindlist">
                 Title
