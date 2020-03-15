@@ -109,6 +109,16 @@ header {
   }
 }
 
+.key-1 {
+  border-top: 4px solid $color-legend-1;
+}
+.key-2 {
+  border-top: 4px solid $color-legend-2;
+}
+.key-3 {
+  border-top: 4px solid $color-legend-3;
+}
+
 .editor-nav {
   & ul {
     display: flex;
@@ -169,6 +179,11 @@ header {
   color: $color-primary-2;
   font-weight: 700;
   background-color: $color-bg-darker !important;
+  border-bottom: 2px solid #011 !important;
+
+  &:hover {
+    background-color: $color-bg !important;
+  }
 }
 
 .simple-keyboard,
@@ -184,5 +199,5 @@ header {
 }
 
 .hg-button-space {
-  width: 80%;
+  width: 70%;
 }
