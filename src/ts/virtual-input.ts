@@ -18,7 +18,7 @@ export class VirtualInput implements Observer {
     }
 
     private rerenderKey(bind: configProperty) {
-        const key = bind.property;
+        const key = this.adjustKeyCode(bind);
         const commandType = bind.value.split(' ')[0].toLowerCase();
 
         // Remove old stylings
@@ -36,9 +36,13 @@ export class VirtualInput implements Observer {
         }
     }
 
+    private handleKeyPress(key: string) {
+        console.log(key);
+    }
+
     renderInput() {
         this.keyboard = new Keyboard({
-            onChange: input => console.log(input),
+            onKeyPress: this.handleKeyPress,
             layout: {
                 default: [
                     "LMB RMB MWHEELUP MWHEELDOWN",
@@ -62,5 +66,22 @@ export class VirtualInput implements Observer {
         binds.forEach(bind => {
             this.rerenderKey(bind);
         });
+    }
+
+    private adjustKeyCode(bind: configProperty) {
+        const toReplace = ['mouse1', 'mouse2', 'tab', 'enter', 'backspace', 'mwheeldown', 'mwheelup'];
+        const expected = ['LMB', 'RMB', '{tab}', '{enter}', '{bksp}', 'MWHEELDOWN', 'MWHEELUP'];
+        let key = bind.property.toLowerCase();
+
+        toReplace.forEach((k, index) => {
+            if (key === k) {
+                key = expected[index];
+            }
+        });
+
+        if (/f[1-12]/.test(key)) {
+            key = key.toUpperCase();
+        }
+        return key;
     }
 }

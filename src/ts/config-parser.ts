@@ -50,21 +50,6 @@ export class ConfigParser {
 							misc.push({ type, property, value, containsColors });
 					}
 				});
-
-				// Fix wrong key names
-				const toReplace = ['mouse1', 'mouse2', 'tab', 'enter', 'backspace', 'mwheeldown', 'mwheelup'];
-				const expected = ['LMB', 'RMB', '{tab}', '{enter}', '{bksp}', 'MWHEELDOWN', 'MWHEELUP'];
-
-				binds.forEach(bind => {
-					const key = bind.property.toLowerCase();
-
-					toReplace.forEach((k, index) => {
-						if (key === k) {
-							binds[index].property = expected[index];
-						}
-					});
-				});
-
 				res(new WarsowConfig(binds, setas, misc));
 			};
 		})
