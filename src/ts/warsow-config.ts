@@ -1,3 +1,5 @@
+import { Observable, Observer } from './observer';
+
 export interface configProperty {
     type: string;
     property: string;
@@ -5,10 +7,11 @@ export interface configProperty {
     containsColors: boolean;
 }
 
-export class WarsowConfig {
+export class WarsowConfig implements Observable {
     private binds: configProperty[];
     private setas: configProperty[];
     private misc: configProperty[];
+    private observers: Observer[] = [];
 
     constructor(binds: configProperty[],
         setas: configProperty[],
@@ -16,6 +19,24 @@ export class WarsowConfig {
         this.binds = binds;
         this.setas = setas;
         this.misc = misc;
+    }
+
+    registerObserver(o: Observer) {
+        this.observers.push(o);
+    }
+
+    removeObserver(o: Observer) {
+        const index = this.observers.findIndex(obs => obs === o);
+
+        if (index > -1) {
+            this.observers.splice(index, 1);
+        }
+    }
+
+    notifyObservers(key: string) {
+        this.observers.forEach(obs => {
+            obs.update(key);
+        });
     }
 
     getBinds() {
@@ -45,6 +66,10 @@ export class WarsowConfig {
             property.value = value;
             property.containsColors = /\^[0-9]/.test(value);
         }
+    }
+
+    getBind(key: string) {
+        return this.binds.find(bind => bind.property.toLowerCase() === key.toLowerCase());
     }
 
     setSeta(cmd: string, value: string) {
@@ -90,4 +115,6 @@ export class WarsowConfig {
 
         return config;
     }
+
+
 }

@@ -1,13 +1,39 @@
 import { EditorState } from './editor-state';
+import { Observer } from './observer';
 import Keyboard from 'simple-keyboard';
+import { configProperty } from './warsow-config';
 import 'simple-keyboard/build/css/index.css';
 
-export class VirtualInput {
+export class VirtualInput implements Observer {
     private keyboard;
     private state: EditorState;
 
     constructor(state: EditorState) {
         this.state = state;
+    }
+
+    update(key: string) {
+        const bind = this.state.getConfig().getBind(key);
+        this.rerenderKey(bind);
+    }
+
+    private rerenderKey(bind: configProperty) {
+        const key = bind.property;
+        const commandType = bind.value.split(' ')[0].toLowerCase();
+
+        // Remove old stylings
+        this.keyboard.removeButtonTheme(key, 'key-1 key-2 key-3');
+
+        switch (commandType) {
+            case 'say':
+                this.keyboard.addButtonTheme(key, 'key-1');
+                break;
+            case 'vsay':
+                this.keyboard.addButtonTheme(key, 'key-2');
+                break;
+            default:
+                this.keyboard.addButtonTheme(key, 'key-3');
+        }
     }
 
     renderInput() {
@@ -33,32 +59,8 @@ export class VirtualInput {
 
         const binds = this.state.getConfig().getBinds();
 
-        const toReplace = ['mouse1', 'mouse2', 'tab', 'enter', 'backspace', 'mwheeldown', 'mwheelup'];
-        const expected = ['LMB', 'RMB', '{tab}', '{enter}', '{bksp}', 'MWHEELDOWN', 'MWHEELUP'];
-
         binds.forEach(bind => {
-            let key = bind.property.toLowerCase();
-
-            toReplace.forEach((k, index) => {
-                if (key === k) {
-                    key = expected[index];
-                }
-            });
-
-            console.log(key);
-
-            const commandType = bind.value.split(' ')[0].toLowerCase();
-
-            switch (commandType) {
-                case 'say':
-                    this.keyboard.addButtonTheme(key, 'key-1');
-                    break;
-                case 'vsay':
-                    this.keyboard.addButtonTheme(key, 'key-2');
-                    break;
-                default:
-                    this.keyboard.addButtonTheme(key, 'key-3');
-            }
+            this.rerenderKey(bind);
         });
     }
 }

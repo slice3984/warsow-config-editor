@@ -7,6 +7,7 @@ document.getElementById('open-config').addEventListener('change', () => {
     ConfigParser.parse().then((cfg: WarsowConfig) => {
         const editor = new EditorState(cfg);
         const input = new VirtualInput(editor);
+        cfg.registerObserver(input);
         input.renderInput();
 
         const pane1 = document.querySelector('.pane-1');
