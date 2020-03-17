@@ -262,6 +262,11 @@ header {
   &__controls {
     display: flex;
     font-weight: 700;
+
+    & a {
+      color: $color-white;
+      text-decoration: none;
+    }
   }
 
   &__edit {
@@ -269,5 +274,38 @@ header {
   }
 
   &__controls {
+  }
+
+  // Warsow color codes
+  .c0 {
+    color: $color-wsw-0;
+  }
+
+  .c1 {
+    color: $color-wsw-1;
+  }
+  .c2 {
+    color: $color-wsw-2;
+  }
+  .c3 {
+    color: $color-wsw-3;
+  }
+  .c4 {
+    color: $color-wsw-4;
+  }
+  .c5 {
+    color: $color-wsw-5;
+  }
+  .c6 {
+    color: $color-wsw-6;
+  }
+  .c7 {
+    color: $color-wsw-7;
+  }
+  .c8 {
+    color: $color-wsw-8;
+  }
+  .c9 {
+    color: $color-wsw-9;
   }
 }
