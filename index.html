@@ -20,7 +20,7 @@
             <li><a href="#" class="btn">btn</a></li>
         </ul>
     </header>
-    <main class="main">
+    <main class="main hidden">
         <div class="main__left">
             <nav class="editor-nav">
                 <ul>
@@ -38,7 +38,111 @@
                             <div class="legend__color legend__color--3">Misc</div>
                         </div>
                     </div>
+                    <h1 class="keyboard-info">Click on a key to display the bind settings.</h1>
+                    <div class="bind-editor">
+                        <div class="bind-editor__heading">
+                            Key: A
+                        </div>
+                        <div class="bind-editor__content">
+                            <div class="bind-editor__weapons">
+                                <h2>Weapons</h2>
+                                <div>
+                                    <input type="radio" name="selection" id="weapon-1">
+                                    <label for="weapon-1">
+                                        <img src="./img/gunblade.png" alt="">
+                                    </label>
+                                    <input type="radio" name="selection" id="weapon-2">
+                                    <label for="weapon-2">
+                                        <img src="./img/machinegun.png" alt="">
+                                    </label>
+                                    <input type="radio" name="selection" id="weapon-3">
+                                    <label for="weapon-3">
+                                        <img src="./img/riot.png" alt="">
+                                    </label>
+                                    <input type="radio" name="selection" id="weapon-4">
+                                    <label for="weapon-4">
+                                        <img src="./img/grenade.png" alt="">
+                                    </label>
+                                    <input type="radio" name="selection" id="weapon-5">
+                                    <label for="weapon-5">
+                                        <img class="active-selection" src="./img/rocket.png" alt="">
+                                    </label>
+                                    <input type="radio" name="selection" id="weapon-6">
+                                    <label for="weapon-6">
+                                        <img src="./img/plasma.png" alt="">
+                                    </label>
+                                    <input type="radio" name="selection" id="weapon-7">
+                                    <label for="weapon-7">
+                                        <img src="./img/laser.png" alt="">
+                                    </label>
+                                    <input type="radio" name="selection" id="weapon-8">
+                                    <label for="weapon-8">
+                                        <img src="./img/electro.png" alt="">
+                                    </label>
+                                    <input type="radio" name="selection" id="weapon-9">
+                                    <label for="weapon-9">
+                                        <img src="./img/instagun.png" alt="">
+                                    </label>
+                                </div>
+                            </div>
 
+                        </div>
+                        <h2>Chat</h2>
+                        <div class="chat-options">
+                            <div class="chat-options__channel">
+                                <input type="radio" name="chat-channel" id="global">
+                                <label for="global">All</label>
+                                <input type="radio" name="chat-channel" id="team">
+                                <label for="team">Team</label>
+                            </div>
+                            <div class="chat-options__vsay">
+                                <select name="" id="vsay">
+                                    <option value="none">No Vsay</option>
+                                    <option value="needhealth">Need health!</option>
+                                    <option value="needweapon">Need weapon!</option>
+                                    <option value="needarmor">Need armor!</option>
+                                    <option value="affirmative">Affirmative!</option>
+                                    <option value="negative">Negative!</option>
+                                    <option value="yes">Yes!</option>
+                                    <option value="no">No!</option>
+                                    <option value="ondefense">I'm on defense!</option>
+                                    <option value="onoffense">I'm on offense!</option>
+                                    <option value="oops">Oops!</option>
+                                    <option value="sorry">Sorry!</option>
+                                    <option value="thanks">Thanks!</option>
+                                    <option value="noproblem">No problem!</option>
+                                    <option value="yeehaa">Yeehaa!</option>
+                                    <option value="goodgame">Good game!</option>
+                                    <option value="defend">Defend!</option>
+                                    <option value="attack">Attack!</option>
+                                    <option value="needbackup">Need backup!</option>
+                                    <option value="booo">Booo!</option>
+                                    <option value="needdefense">Need defense!</option>
+                                    <option value="needoffense">Need offense!</option>
+                                    <option value="needhelp">Need help!</option>
+                                    <option value="roger">Roger!</option>
+                                    <option value="armorfree">Armor free!</option>
+                                    <option value="areasecured">Area secured!</option>
+                                    <option value="boomstick">Need a weapon!</option>
+                                    <option value="gotopowerup">Go to main powerup!</option>
+                                    <option value="gotoquad">Go to quad!</option>
+                                    <option value="ok">Ok!</option>
+                                    <option value="defend_a">Defend A!</option>
+                                    <option value="attack_a">Attack A!</option>
+                                    <option value="defend_b">Defend B!</option>
+                                    <option value="attack_b">Attack B!</option>
+                                </select>
+                            </div>
+                            <div class="chat-options__input">
+                                <input type="text" name="" id="editor-input" placeholder="Text to chat goes here..">
+                                <div class="chat-options__colors"></div>
+                            </div>
+                            <div class="chat-options__preview">
+                                <h2>Preview</h2>
+                                <div id="editor-preview">Type something..</div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 

@@ -43,5 +43,7 @@ document.getElementById('open-config').addEventListener('change', () => {
                 selected = 1;
             }
         });
+
+        document.querySelector('.main').classList.toggle('hidden');
     });
 });

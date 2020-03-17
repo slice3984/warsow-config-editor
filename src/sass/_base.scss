@@ -15,7 +15,12 @@ html {
 body {
   display: flex;
   flex-flow: column;
+  background-color: $color-bg;
   height: 100%;
+}
+
+label {
+  cursor: pointer;
 }
 
 // Header
@@ -60,7 +65,6 @@ header {
   padding: 1rem;
   font-size: 1.5rem;
   color: $color-white;
-  background-color: $color-bg;
 
   &__left {
     width: 80%;
@@ -82,12 +86,19 @@ header {
 }
 
 .left-content {
+  height: 100%;
+  justify-content: center;
   &__input-area {
     margin: auto;
     display: flex;
     justify-content: center;
     align-items: center;
   }
+}
+
+.keyboard-info {
+  text-align: center;
+  margin-top: 5rem;
 }
 
 .legend {
@@ -275,37 +286,225 @@ header {
 
   &__controls {
   }
+}
 
-  // Warsow color codes
-  .c0 {
-    color: $color-wsw-0;
+.c0bg {
+  background-color: $color-wsw-0;
+}
+.c1bg {
+  background-color: $color-wsw-1;
+}
+.c2bg {
+  background-color: $color-wsw-2;
+}
+.c3bg {
+  background-color: $color-wsw-3;
+}
+.c4bg {
+  background-color: $color-wsw-4;
+}
+.c5bg {
+  background-color: $color-wsw-5;
+}
+.c6bg {
+  background-color: $color-wsw-6;
+}
+.c7bg {
+  background-color: $color-wsw-7;
+}
+.c8bg {
+  background-color: $color-wsw-8;
+}
+.c9bg {
+  background-color: $color-wsw-9;
+}
+
+// Warsow color codes
+.c0 {
+  color: $color-wsw-0;
+}
+
+.c1 {
+  color: $color-wsw-1;
+}
+.c2 {
+  color: $color-wsw-2;
+}
+.c3 {
+  color: $color-wsw-3;
+}
+.c4 {
+  color: $color-wsw-4;
+}
+.c5 {
+  color: $color-wsw-5;
+}
+.c6 {
+  color: $color-wsw-6;
+}
+.c7 {
+  color: $color-wsw-7;
+}
+.c8 {
+  color: $color-wsw-8;
+}
+.c9 {
+  color: $color-wsw-9;
+}
+
+// Bind editor
+.bind-editor {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  margin: auto;
+  margin-top: 2rem;
+  background-color: $color-bg-darker;
+  border-radius: 3px;
+
+  &__heading {
+    border-radius: 3px;
+    align-self: flex-end;
+    font-size: 2rem;
+    font-weight: 700;
+    padding: 0.5rem;
+    margin-bottom: 0.5rem;
+    background-color: darken($color-primary-2, 5%);
   }
 
-  .c1 {
-    color: $color-wsw-1;
+  &__weapons {
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 2rem;
+
+    & h2 {
+      font-size: 2.5rem;
+      margin-bottom: 2rem;
+    }
+
+    & div {
+      display: flex;
+
+      & label {
+        margin-right: 1.5rem;
+
+        & img {
+          height: 6rem;
+          width: 6rem;
+        }
+
+        &:hover {
+          transform: scale(1.1);
+        }
+      }
+
+      & input {
+        display: none;
+
+        &:checked + label {
+          filter: drop-shadow(2px 2px 0 $color-primary-2) drop-shadow(-2px -2px 0 $color-primary-2)
+            drop-shadow(2px -2px 0 $color-primary-2) drop-shadow(-2px 2px 0 $color-primary-2);
+        }
+      }
+    }
   }
-  .c2 {
-    color: $color-wsw-2;
+}
+
+.chat-options {
+  display: flex;
+  align-items: center;
+  margin-top: 1rem;
+
+  &__channel {
+    & label {
+      display: block;
+      padding: 0.5rem 1rem;
+      margin-bottom: 1rem;
+      font-weight: 700;
+      text-align: center;
+      border-radius: 3px;
+      background-color: $color-primary-1;
+    }
+
+    & input {
+      display: none;
+    }
   }
-  .c3 {
-    color: $color-wsw-3;
+
+  & h2 {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
   }
-  .c4 {
-    color: $color-wsw-4;
+
+  & input:checked + label {
+    background-color: darken($color-primary-1, 10%);
   }
-  .c5 {
-    color: $color-wsw-5;
+
+  &__vsay {
+    margin-left: 2rem;
+
+    & select {
+      border: none;
+      box-shadow: 2px 2px 5px 1px rgba(0, 0, 0, 0.3);
+      border-radius: 2px;
+      padding: 0.5rem 1rem;
+      font-weight: 700;
+      outline: none;
+      background-color: $color-primary-1;
+      color: $color-white;
+
+      &:checked {
+        background-color: darken($color-primary-1, 10%);
+      }
+    }
   }
-  .c6 {
-    color: $color-wsw-6;
+
+  &__input {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    margin-left: 2rem;
+
+    & input {
+      width: 100%;
+      padding: 0.5rem 1rem;
+      margin-bottom: 1rem;
+      outline: none;
+      border: none;
+      border-bottom: 1px solid $color-primary-2;
+      color: $color-white;
+      font-size: 1.75rem;
+      background-color: transparent;
+    }
   }
-  .c7 {
-    color: $color-wsw-7;
+
+  &__colors {
+    display: flex;
+
+    & div {
+      width: 3rem;
+      height: 3rem;
+    }
   }
-  .c8 {
-    color: $color-wsw-8;
-  }
-  .c9 {
-    color: $color-wsw-9;
+
+  &__preview {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    margin-left: 2rem;
+
+    & h2 {
+      font-size: 2rem;
+      margin-bottom: 0;
+    }
+
+    & div {
+      font-size: 2rem;
+      max-width: 30rem;
+      max-height: 10rem;
+      word-break: break-all;
+    }
   }
 }

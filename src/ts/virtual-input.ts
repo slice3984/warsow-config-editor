@@ -3,13 +3,17 @@ import { Observer } from './observer';
 import Keyboard from 'simple-keyboard';
 import { configProperty } from './warsow-config';
 import 'simple-keyboard/build/css/index.css';
+import { BindEditor } from './bind-editor';
 
 export class VirtualInput implements Observer {
     private keyboard;
     private state: EditorState;
+    private alreadyUsed = false;
+    private editor: BindEditor;
 
     constructor(state: EditorState) {
         this.state = state;
+        this.editor = new BindEditor(state);
     }
 
     update(key: string) {
@@ -18,7 +22,7 @@ export class VirtualInput implements Observer {
     }
 
     private rerenderKey(bind: configProperty) {
-        const key = this.adjustKeyCode(bind);
+        const key = this.adjustKeyCode(bind, false);
         const commandType = bind.value.split(' ')[0].toLowerCase();
 
         // Remove old stylings
@@ -37,12 +41,16 @@ export class VirtualInput implements Observer {
     }
 
     private handleKeyPress(key: string) {
-        console.log(key);
+        // Get rid of the help message
+        if (!this.alreadyUsed) {
+            document.querySelector('.keyboard-info').classList.add('hidden');
+            this.alreadyUsed = true;
+        }
     }
 
     renderInput() {
         this.keyboard = new Keyboard({
-            onKeyPress: this.handleKeyPress,
+            onKeyPress: this.handleKeyPress.bind(this),
             layout: {
                 default: [
                     "LMB RMB MWHEELUP MWHEELDOWN",
@@ -68,13 +76,25 @@ export class VirtualInput implements Observer {
         });
     }
 
-    private adjustKeyCode(bind: configProperty) {
-        const toReplace = ['mouse1', 'mouse2', 'tab', 'enter', 'backspace', 'mwheeldown', 'mwheelup'];
-        const expected = ['LMB', 'RMB', '{tab}', '{enter}', '{bksp}', 'MWHEELDOWN', 'MWHEELUP'];
-        let key = bind.property.toLowerCase();
+    private adjustKeyCode(bind: configProperty | string, reverse: boolean) {
+        let toReplace = ['mouse1', 'mouse2', 'tab', 'enter', 'backspace', 'mwheeldown', 'mwheelup', 'space'];
+        let expected = ['LMB', 'RMB', '{tab}', '{enter}', '{bksp}', 'MWHEELDOWN', 'MWHEELUP', '{space}'];
+
+        if (reverse) {
+            const tmp = toReplace;
+            toReplace = expected;
+            expected = tmp;
+        }
+
+        let key;
+        if (typeof bind === 'string') {
+            key = bind;
+        } else {
+            key = bind.property;
+        }
 
         toReplace.forEach((k, index) => {
-            if (key === k) {
+            if (key.toUpperCase() === k.toUpperCase()) {
                 key = expected[index];
             }
         });
