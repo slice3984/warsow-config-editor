@@ -180,12 +180,97 @@ header {
 .btn {
   padding: 0.5rem 1rem;
   border-radius: 3px;
+  text-align: center;
   cursor: pointer;
   color: $color-white;
   background-color: $color-primary-2;
 
   &:hover {
     background-color: $color-primary-1;
+  }
+}
+
+.btn--primary-1 {
+  background-color: $color-primary-1;
+
+  &:hover {
+    background-color: darken($color-primary-1, 10%);
+  }
+}
+
+// Checkbox style
+.custom-checkbox {
+  position: absolute;
+  right: 1rem;
+
+  &__box {
+    display: none;
+
+    & + label {
+      position: relative;
+      cursor: pointer;
+      margin-right: 0 !important;
+
+      &::before {
+        content: "";
+        margin-right: 1rem;
+        display: inline-block;
+        vertical-align: text-top;
+        width: 4rem;
+        height: 4rem;
+        border-radius: 50%;
+        background-color: $color-primary-1;
+      }
+    }
+
+    &:hover + label::before {
+      background-color: darken($color-primary-1, 5%);
+    }
+
+    &:focus + label::before {
+      box-shadow: 0 0 0 3px rgba($color-bg-darker, 0.12);
+    }
+
+    &:checked + label::before {
+      background-color: lighten($color-primary-1, 10%);
+    }
+
+    &:checked + label {
+      background-color: transparent !important;
+    }
+
+    &:checked + label::after {
+      content: "\2714";
+      position: absolute;
+      left: 0.5rem;
+      top: -0.5rem;
+      color: $color-white;
+      font-size: 3.5rem;
+    }
+  }
+}
+
+select {
+  border: none;
+  box-shadow: 2px 2px 5px 1px rgba(0, 0, 0, 0.3);
+  border-radius: 2px;
+  padding: 0.5rem 1rem;
+  font-weight: 700;
+  outline: none;
+  background-color: $color-primary-1;
+  color: $color-white;
+
+  &:checked {
+    background-color: darken($color-primary-1, 10%);
+  }
+}
+
+.bind-selection {
+  position: absolute;
+  left: 2rem;
+
+  & .btn {
+    margin-top: 0.5rem;
   }
 }
 
@@ -354,6 +439,7 @@ header {
 
 // Bind editor
 .bind-editor {
+  position: relative;
   display: flex;
   flex-flow: column;
   align-items: center;
@@ -372,17 +458,33 @@ header {
     background-color: darken($color-primary-2, 5%);
   }
 
+  &__checkbox-info {
+    position: relative;
+    align-self: flex-end;
+    font-weight: 700;
+
+    &::after {
+      content: "\2193";
+      position: absolute;
+      top: 2rem;
+      right: 3.5rem;
+      font-size: 2.5rem;
+      font-weight: 700;
+    }
+  }
+
+  & h2 {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    text-align: center;
+  }
+
   &__weapons {
     display: flex;
     flex-flow: column;
     justify-content: center;
     align-items: center;
     margin-bottom: 2rem;
-
-    & h2 {
-      font-size: 2.5rem;
-      margin-bottom: 2rem;
-    }
 
     & div {
       display: flex;
@@ -395,12 +497,12 @@ header {
           width: 6rem;
         }
 
-        &:hover {
+        &[for|="weapon"]:hover {
           transform: scale(1.1);
         }
       }
 
-      & input {
+      & input[type="radio"] {
         display: none;
 
         &:checked + label {
@@ -410,12 +512,35 @@ header {
       }
     }
   }
+
+  &__commands {
+    display: flex;
+    align-items: center;
+    margin-bottom: 2rem;
+
+    & input {
+      width: 100%;
+      padding: 0.5rem 1rem;
+      margin-bottom: 1rem;
+      outline: none;
+      border: none;
+      border-bottom: 1px solid $color-primary-2;
+      color: $color-white;
+      font-size: 1.75rem;
+      background-color: transparent;
+    }
+
+    & label {
+      font-size: 2rem;
+      margin-right: 1rem;
+    }
+  }
 }
 
 .chat-options {
   display: flex;
   align-items: center;
-  margin-top: 1rem;
+  margin-bottom: 2rem;
 
   &__channel {
     & label {
@@ -433,32 +558,12 @@ header {
     }
   }
 
-  & h2 {
-    font-size: 2.5rem;
-    margin-bottom: 2rem;
-  }
-
   & input:checked + label {
     background-color: darken($color-primary-1, 10%);
   }
 
   &__vsay {
     margin-left: 2rem;
-
-    & select {
-      border: none;
-      box-shadow: 2px 2px 5px 1px rgba(0, 0, 0, 0.3);
-      border-radius: 2px;
-      padding: 0.5rem 1rem;
-      font-weight: 700;
-      outline: none;
-      background-color: $color-primary-1;
-      color: $color-white;
-
-      &:checked {
-        background-color: darken($color-primary-1, 10%);
-      }
-    }
   }
 
   &__input {
