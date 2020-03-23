@@ -7,6 +7,13 @@ export interface configProperty {
     containsColors: boolean;
 }
 
+export interface bindParts {
+    says: string[];
+    vsays: string[];
+    weapon: string;
+    misc: string[];
+}
+
 export class WarsowConfig implements Observable {
     private binds: configProperty[];
     private setas: configProperty[];
@@ -70,6 +77,46 @@ export class WarsowConfig implements Observable {
 
     getBind(key: string) {
         return this.binds.find(bind => bind.property.toLowerCase() === key.toLowerCase());
+    }
+
+    getBindContent(bind: configProperty): bindParts {
+        const regex = /([\w-+]+) *(([\w]+)(.*))/gm;
+        const value = bind.value;
+        const parts = value.split(';');
+
+        const says = [];
+        const vsays = [];
+        const misc = [];
+        let weapon;
+              
+        parts.forEach(part => {
+            const matchParts = [];
+            let match;
+
+            while ((match = regex.exec(part)) !== null) {
+                match.forEach((match: any, index) => {
+                    matchParts.push(match);
+                })
+            }
+
+            const cmd = matchParts[1];
+            switch (cmd) {
+                case 'say':
+                    console.log('hi')
+                    says.push(matchParts[2]);
+                    break;
+                case 'vsay':
+                    vsays.push([matchParts[3], (matchParts[4] || '')]);
+                    break;
+                case 'use':
+                    weapon = matchParts[3];
+                    break;
+                default:
+                    misc.push(matchParts[0]);
+            }
+        });
+
+        return { says, vsays, misc, weapon };
     }
 
     setSeta(cmd: string, value: string) {
