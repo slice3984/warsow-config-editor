@@ -39,7 +39,7 @@
                         </div>
                     </div>
                     <h1 class="keyboard-info">Click on a key to display the bind settings.</h1>
-                    <div class="bind-editor">
+                    <div class="bind-editor hidden">
                         <div class="bind-editor__heading">
                             Key: A
                         </div>
@@ -100,7 +100,7 @@
                                 <select id="chat-bind-selection">
                                     <option value="chat1">Chat #1</option>
                                 </select>
-                                <div class="btn btn--primary-1">Add new</div>
+                                <div class="btn btn--primary-1" id="add-chat-bind">Add new</div>
                             </div>
                             <div class="chat-options__channel">
                                 <input type="radio" name="chat-channel" id="global">
@@ -162,10 +162,10 @@
                         <h2>Custom Commands</h2>
                         <div class="bind-editor__commands">
                             <div class="bind-selection">
-                                <select id="chat-bind-selection">
-                                    <option value="chat1">Command #1</option>
+                                <select id="command-bind-selection">
+                                    <option value="command1">Command #1</option>
                                 </select>
-                                <div class="btn btn--primary-1">Add new</div>
+                                <div class="btn btn--primary-1"id="add-cmd-bind">Add new</div>
                             </div>
                             <label for="command">Command: </label>
                             <input type="text" id="command">

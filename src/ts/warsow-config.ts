@@ -9,7 +9,9 @@ export interface configProperty {
 
 export interface bindParts {
     says: string[];
+    saysTeam: string[];
     vsays: string[];
+    vsaysTeam: string[];
     weapon: string;
     misc: string[];
 }
@@ -79,13 +81,15 @@ export class WarsowConfig implements Observable {
         return this.binds.find(bind => bind.property.toLowerCase() === key.toLowerCase());
     }
 
-    getBindContent(bind: configProperty): bindParts {
-        const regex = /([\w-+]+) *(([\w]+)(.*))/gm;
+    static getBindContent(bind: configProperty): bindParts {
+        const regex = /(\S+) *(([\S]+)(.*))/gm;
         const value = bind.value;
         const parts = value.split(';');
 
         const says = [];
+        const saysTeam = [];
         const vsays = [];
+        const vsaysTeam = [];
         const misc = [];
         let weapon;
               
@@ -100,23 +104,28 @@ export class WarsowConfig implements Observable {
             }
 
             const cmd = matchParts[1];
+            console.log(cmd);
             switch (cmd) {
                 case 'say':
-                    console.log('hi')
                     says.push(matchParts[2]);
+                    break;
+                case 'say_team':
+                    saysTeam.push(matchParts[2]);
                     break;
                 case 'vsay':
                     vsays.push([matchParts[3], (matchParts[4] || '')]);
                     break;
+                case 'vsay_team':
+                    vsaysTeam.push([matchParts[3], (matchParts[4] || '')]);
+                    break;
                 case 'use':
-                    weapon = matchParts[3];
+                    weapon = matchParts[2];
                     break;
                 default:
                     misc.push(matchParts[0]);
             }
         });
-
-        return { says, vsays, misc, weapon };
+        return { says, saysTeam, vsays, vsaysTeam, misc, weapon };
     }
 
     setSeta(cmd: string, value: string) {

@@ -8,7 +8,6 @@ import { BindEditor } from './bind-editor';
 export class VirtualInput implements Observer {
     private keyboard;
     private state: EditorState;
-    private alreadyUsed = false;
     private editor: BindEditor;
 
     constructor(state: EditorState) {
@@ -41,11 +40,7 @@ export class VirtualInput implements Observer {
     }
 
     private handleKeyPress(key: string) {
-        // Get rid of the help message
-        if (!this.alreadyUsed) {
-            document.querySelector('.keyboard-info').classList.add('hidden');
-            this.alreadyUsed = true;
-        }
+        this.editor.editBind(key);
     }
 
     renderInput() {
