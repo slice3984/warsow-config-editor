@@ -54,6 +54,7 @@ export class WarsowColors {
                 lastActive.activeInput.focus();
                 const pos = lastActive.end + `^${i}`.length;
                 lastActive.activeInput.setSelectionRange(pos, pos);
+                lastActive.activeInput.dispatchEvent(new InputEvent('input'));
             });
 
             parent.appendChild(colorDivEl);

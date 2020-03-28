@@ -7,7 +7,10 @@ export interface configProperty {
     containsColors: boolean;
 }
 
+export enum ChatType { Say, SayTeam, Vsay, VsayTeam };
+
 export interface bindParts {
+    orderChats: ChatType[];
     says: string[];
     saysTeam: string[];
     vsays: string[];
@@ -60,6 +63,13 @@ export class WarsowConfig implements Observable {
         return this.misc;
     }
 
+    deleteBind(key: string) {
+        const index = this.binds.findIndex(bind => bind.property.toLowerCase() === key.toLowerCase());
+        if (index > -1) {
+            this.binds.splice(index, 1);
+        }
+    }
+
     setBind(key: string, value: string) {
         const property = this.binds.find(property => property.property === key);
 
@@ -91,8 +101,10 @@ export class WarsowConfig implements Observable {
         const vsays = [];
         const vsaysTeam = [];
         const misc = [];
+
+        let orderChats: ChatType[] = [];
         let weapon;
-              
+
         parts.forEach(part => {
             const matchParts = [];
             let match;
@@ -104,28 +116,34 @@ export class WarsowConfig implements Observable {
             }
 
             const cmd = matchParts[1];
-            console.log(cmd);
+
             switch (cmd) {
                 case 'say':
                     says.push(matchParts[2]);
+                    orderChats.push(ChatType.Say);
                     break;
                 case 'say_team':
                     saysTeam.push(matchParts[2]);
+                    orderChats.push(ChatType.SayTeam);
                     break;
                 case 'vsay':
                     vsays.push([matchParts[3], (matchParts[4] || '')]);
+                    orderChats.push(ChatType.Vsay);
                     break;
                 case 'vsay_team':
                     vsaysTeam.push([matchParts[3], (matchParts[4] || '')]);
+                    orderChats.push(ChatType.VsayTeam);
                     break;
                 case 'use':
                     weapon = matchParts[2];
                     break;
                 default:
-                    misc.push(matchParts[0]);
+                    if (matchParts[0]) {
+                        misc.push(matchParts[0]);
+                    }
             }
         });
-        return { says, saysTeam, vsays, vsaysTeam, misc, weapon };
+        return { says, saysTeam, vsays, vsaysTeam, misc, weapon, orderChats };
     }
 
     setSeta(cmd: string, value: string) {
@@ -171,6 +189,4 @@ export class WarsowConfig implements Observable {
 
         return config;
     }
-
-
 }

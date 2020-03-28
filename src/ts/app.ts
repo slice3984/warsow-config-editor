@@ -3,9 +3,6 @@ import { WarsowConfig } from './warsow-config';
 import { EditorState } from './editor-state';
 import { VirtualInput } from './virtual-input';
 import { BindList } from './bind-list';
-import { WarsowColors } from './color';
-
-WarsowColors.parseColors('vsay thanks ^6F A G S ! ! ! ^7(in memories of ^5bounce^7)');
 
 document.getElementById('open-config').addEventListener('change', () => {
     ConfigParser.parse().then((cfg: WarsowConfig) => {
