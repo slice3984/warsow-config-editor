@@ -11,6 +11,8 @@ document.getElementById('open-config').addEventListener('change', () => {
         const bindList = new BindList(editor);
 
         cfg.registerObserver(input);
+        cfg.registerObserver(bindList);
+        
         input.renderInput();
 
         const pane1 = document.querySelector('.pane-1');

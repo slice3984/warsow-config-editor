@@ -27,6 +27,10 @@ export class VirtualInput implements Observer {
         // Remove old stylings
         this.keyboard.removeButtonTheme(key, 'key-1 key-2 key-3');
 
+        if (bind.remove) {
+            return;
+        }
+
         switch (commandType) {
             case 'say':
                 this.keyboard.addButtonTheme(key, 'key-1');

@@ -475,7 +475,7 @@ export class BindEditor {
             });
         }
 
-        if (bind === '') {
+        if (bind.trim() === '') {
             this.state.getConfig().deleteBind(this.currEditedKey);
         } else {
             this.state.getConfig().setBind(this.currEditedKey, bind.trim());

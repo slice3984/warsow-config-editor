@@ -5,6 +5,7 @@ export interface configProperty {
     property: string;
     value: string;
     containsColors: boolean;
+    remove?: boolean;
 }
 
 export enum ChatType { Say, SayTeam, Vsay, VsayTeam };
@@ -51,7 +52,14 @@ export class WarsowConfig implements Observable {
         });
     }
 
+    private sortBinds() {
+        this.binds = this.binds.sort((a: configProperty, b: configProperty) => {
+            return a.property.localeCompare(b.property);
+        });
+    }
+
     getBinds() {
+        this.sortBinds();
         return this.binds;
     }
 
@@ -66,6 +74,8 @@ export class WarsowConfig implements Observable {
     deleteBind(key: string) {
         const index = this.binds.findIndex(bind => bind.property.toLowerCase() === key.toLowerCase());
         if (index > -1) {
+            this.binds[index].remove = true;
+            this.notifyObservers(key);
             this.binds.splice(index, 1);
         }
     }
@@ -85,6 +95,8 @@ export class WarsowConfig implements Observable {
             property.value = value;
             property.containsColors = /\^[0-9]/.test(value);
         }
+
+        this.notifyObservers(key);
     }
 
     getBind(key: string) {
