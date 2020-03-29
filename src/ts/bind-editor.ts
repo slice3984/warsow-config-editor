@@ -1,6 +1,7 @@
 import { EditorState } from "./editor-state";
 import { WarsowColors } from "./color";
 import { WarsowConfig, ChatType } from "./warsow-config";
+import { Observer } from "./observer";
 
 interface Weapon {
     id: number;
@@ -14,7 +15,7 @@ interface ChatPart {
     vsay?: string;
 }
 
-export class BindEditor {
+export class BindEditor implements Observer {
     private state: EditorState;
     private previewEl = document.getElementById('editor-preview') as HTMLDivElement;
     private input = document.getElementById('editor-input') as HTMLInputElement;
@@ -49,6 +50,14 @@ export class BindEditor {
     constructor(state: EditorState) {
         this.state = state;
         this.init();
+    }
+
+    public update(key: string) {
+        // Catch bind delete using the bind list
+        const bind = this.state.getConfig().getBind(key);
+        if (bind.remove && bind.property === this.currEditedKey) {
+            this.resetEditor();
+        }
     }
 
     private init() {

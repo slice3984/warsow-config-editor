@@ -12,37 +12,61 @@ document.getElementById('open-config').addEventListener('change', () => {
 
         cfg.registerObserver(input);
         cfg.registerObserver(bindList);
-        
+
         input.renderInput();
-
-        const pane1 = document.querySelector('.pane-1');
-        const pane2 = document.querySelector('.pane-2');
-
-        const linkPane1 = document.getElementById('link-pane-1');
-        const linkPane2 = document.getElementById('link-pane-2');
-
-        let selected = 0;
-
-        linkPane1.addEventListener('click', () => {
-            if (selected !== 0) {
-                linkPane1.classList.toggle('selected');
-                linkPane2.classList.remove('selected');
-                pane1.classList.remove('hidden')
-                pane2.classList.add('hidden');
-                selected = 0;
-            }
-        });
-
-        linkPane2.addEventListener('click', () => {
-            if (selected !== 1) {
-                linkPane2.classList.add('selected');
-                linkPane1.classList.remove('selected');
-                pane2.classList.remove('hidden')
-                pane1.classList.add('hidden');
-                selected = 1;
-            }
-        });
+        PaneControl.initEventListeners();
 
         document.querySelector('.main').classList.toggle('hidden');
     });
 });
+
+export class PaneControl {
+    private static selected = 0;
+    private static pane1 = document.querySelector('.pane-1');
+    private static pane2 = document.querySelector('.pane-2');
+
+    private static linkPane1 = document.getElementById('link-pane-1');
+    private static linkPane2 = document.getElementById('link-pane-2');
+
+    static switchToFirst() {
+        if (this.selected !== 0) {
+            this.linkPane1.classList.toggle('selected');
+            this.linkPane2.classList.remove('selected');
+            this.pane1.classList.remove('hidden')
+            this.pane2.classList.add('hidden');
+            this.selected = 0;
+        }
+    }
+
+    static switchToSecond() {
+        if (this.selected !== 1) {
+            this.linkPane2.classList.add('selected');
+            this.linkPane1.classList.remove('selected');
+            this.pane2.classList.remove('hidden')
+            this.pane1.classList.add('hidden');
+            this.selected = 1;
+        }
+    }
+
+    static initEventListeners() {
+        this.linkPane1.addEventListener('click', () => {
+            if (this.selected !== 0) {
+                this.linkPane1.classList.toggle('selected');
+                this.linkPane2.classList.remove('selected');
+                this.pane1.classList.remove('hidden')
+                this.pane2.classList.add('hidden');
+                this.selected = 0;
+            }
+        });
+
+        this.linkPane2.addEventListener('click', () => {
+            if (this.selected !== 1) {
+                this.linkPane2.classList.add('selected');
+                this.linkPane1.classList.remove('selected');
+                this.pane2.classList.remove('hidden')
+                this.pane1.classList.add('hidden');
+                this.selected = 1;
+            }
+        });
+    }
+}

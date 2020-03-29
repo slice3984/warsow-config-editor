@@ -371,6 +371,10 @@ select {
 
   &__controls {
   }
+
+  &__value {
+    word-break: break-all;
+  }
 }
 
 .c0bg {

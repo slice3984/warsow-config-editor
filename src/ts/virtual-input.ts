@@ -12,7 +12,8 @@ export class VirtualInput implements Observer {
 
     constructor(state: EditorState) {
         this.state = state;
-        this.editor = new BindEditor(state);
+        this.editor = state.getBindEditor();
+        this.state.getConfig().registerObserver(this.editor);
     }
 
     update(key: string) {
@@ -44,7 +45,7 @@ export class VirtualInput implements Observer {
     }
 
     private handleKeyPress(key: string) {
-        this.editor.editBind(key);
+        this.editor.editBind(this.adjustKeyCode(key, true));
     }
 
     renderInput() {
@@ -76,8 +77,8 @@ export class VirtualInput implements Observer {
     }
 
     private adjustKeyCode(bind: configProperty | string, reverse: boolean) {
-        let toReplace = ['mouse1', 'mouse2', 'tab', 'enter', 'backspace', 'mwheeldown', 'mwheelup', 'space'];
-        let expected = ['LMB', 'RMB', '{tab}', '{enter}', '{bksp}', 'MWHEELDOWN', 'MWHEELUP', '{space}'];
+        let toReplace = ['mouse1', 'mouse2', 'tab', 'enter', 'backspace', 'mwheeldown', 'mwheelup', 'space', 'lshift', 'LALT'];
+        let expected = ['LMB', 'RMB', '{tab}', '{enter}', '{bksp}', 'MWHEELDOWN', 'MWHEELUP', '{space}', '{shift}', 'lalt'];
 
         if (reverse) {
             const tmp = toReplace;
