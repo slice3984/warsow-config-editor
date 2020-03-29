@@ -30,8 +30,16 @@ export class BindList implements Observer {
 
         // Not displayed
         if (!el) {
-            const indexOfPrevBind = this.state.getConfig().getBinds().indexOf(bind) - 1;
-            this.renderKey(bind, indexOfPrevBind);
+            const binds = this.state.getConfig().getBinds();
+            let indexOfNextBind = binds.indexOf(bind) + 1;
+
+            if (indexOfNextBind >= binds.length) {
+                indexOfNextBind -= 1;
+            }
+
+            const nextElKey = binds[indexOfNextBind].property;
+            const nextEl = this.domRefs.find(el => el.querySelector('.bind__key').textContent.toLowerCase() === nextElKey.toLowerCase());
+            this.renderKey(bind, nextEl);
             return;
         }
 
@@ -43,11 +51,11 @@ export class BindList implements Observer {
     private render() {
         const binds = this.state.getConfig().getBinds();
         binds.forEach(bind => {
-            this.renderKey(bind, -1);
+            this.renderKey(bind, null);
         });
     }
 
-    private renderKey(bind: configProperty, insertPos: number) {
+    private renderKey(bind: configProperty, insertPos: null | HTMLLIElement) {
         const liEl = document.createElement('li') as HTMLLIElement;
 
         const bindEl = document.createElement('div') as HTMLDivElement;
@@ -101,11 +109,10 @@ export class BindList implements Observer {
         liEl.append(bindEl);
         bindEl.className = 'bind';
 
-        if (insertPos < 0) {
+        if (!insertPos) {
             this.bindlistEl.appendChild(liEl);
         } else {
-            const appendToEl = this.domRefs[insertPos];
-            appendToEl.insertAdjacentElement('afterend', liEl);
+            insertPos.insertAdjacentElement('beforebegin', liEl);
         }
 
         this.domRefs.push(liEl);
