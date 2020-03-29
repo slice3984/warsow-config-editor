@@ -200,9 +200,6 @@ header {
 
 // Checkbox style
 .custom-checkbox {
-  position: absolute;
-  right: 1rem;
-
   &__box {
     display: none;
 
@@ -272,6 +269,22 @@ select {
   & .btn {
     margin-top: 0.5rem;
   }
+}
+
+input[type="text"],
+input[type="number"] {
+  outline: none;
+  border: none;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid $color-primary-2;
+  color: $color-white;
+  font-size: 1.75rem;
+  background-color: transparent;
+}
+
+input[type="text"] {
+  width: 100%;
+  padding: 0.5rem 1rem;
 }
 
 // Keyboard styles
@@ -452,6 +465,11 @@ select {
   background-color: $color-bg-darker;
   border-radius: 3px;
 
+  & .custom-checkbox {
+    position: absolute;
+    right: 1rem;
+  }
+
   &__heading {
     border-radius: 3px;
     align-self: flex-end;
@@ -521,18 +539,6 @@ select {
     display: flex;
     align-items: center;
     margin-bottom: 2rem;
-
-    & input {
-      width: 100%;
-      padding: 0.5rem 1rem;
-      margin-bottom: 1rem;
-      outline: none;
-      border: none;
-      border-bottom: 1px solid $color-primary-2;
-      color: $color-white;
-      font-size: 1.75rem;
-      background-color: transparent;
-    }
 
     & label {
       font-size: 2rem;
@@ -615,5 +621,78 @@ select {
       max-height: 10rem;
       word-break: break-all;
     }
+  }
+}
+
+// Pane 2 - Settings
+.pane-2 {
+  height: 90%;
+}
+
+.settings {
+  margin-top: 1rem;
+  padding: 1rem;
+  width: 100%;
+  height: 100%;
+  font-size: 2rem;
+  box-shadow: 10px 10px 5px 0px rgba($color-bg-darker, 0.25);
+  background-color: $color-bg-darker;
+
+  &__main {
+    display: flex;
+    user-select: none;
+    justify-content: space-around;
+  }
+
+  & > h2 {
+    text-align: center;
+  }
+
+  & h3 {
+    margin-bottom: 1rem;
+  }
+
+  &__colors {
+    display: flex;
+
+    & div {
+      width: 3rem;
+      height: 3rem;
+    }
+  }
+
+  &__player {
+    display: flex;
+    justify-content: space-evenly;
+    margin-bottom: 3rem;
+
+    h4 {
+      text-align: center;
+    }
+  }
+
+  &__name {
+    width: 30rem;
+  }
+
+  &__group {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    &:not(:last-child) {
+      margin-bottom: 1rem;
+    }
+  }
+
+  &__left,
+  &__right {
+    & input[type="number"] {
+      font-size: 2rem;
+      width: 6rem;
+    }
+
+    width: 30rem;
   }
 }

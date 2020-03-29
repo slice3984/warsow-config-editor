@@ -3,12 +3,14 @@ import { WarsowConfig } from './warsow-config';
 import { EditorState } from './editor-state';
 import { VirtualInput } from './virtual-input';
 import { BindList } from './bind-list';
+import { Settings } from './settings';
 
 document.getElementById('open-config').addEventListener('change', () => {
     ConfigParser.parse().then((cfg: WarsowConfig) => {
         const editor = new EditorState(cfg);
         const input = new VirtualInput(editor);
         const bindList = new BindList(editor);
+        const settingsEditor = new Settings(editor);
 
         cfg.registerObserver(input);
         cfg.registerObserver(bindList);

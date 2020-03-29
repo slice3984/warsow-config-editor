@@ -22,6 +22,7 @@ export class ConfigParser {
 
 				const binds: configProperty[] = [];
 				const setas: configProperty[] = [];
+				const setaus: configProperty[] = [];
 				const misc: configProperty[] = [];
 
 				lines.forEach(line => {
@@ -46,11 +47,14 @@ export class ConfigParser {
 						case 'seta':
 							setas.push({ type, property, value, containsColors });
 							break;
+						case 'setau':
+							setaus.push({ type, property, value, containsColors });
+
 						default:
 							misc.push({ type, property, value, containsColors });
 					}
 				});
-				res(new WarsowConfig(binds, setas, misc));
+				res(new WarsowConfig(binds, setas, setaus, misc));
 			};
 		})
 	}
