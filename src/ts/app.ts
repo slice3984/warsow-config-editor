@@ -5,9 +5,12 @@ import { VirtualInput } from './virtual-input';
 import { BindList } from './bind-list';
 import { Settings } from './settings';
 
+const exportBtnEl = document.getElementById('export') as HTMLLinkElement;
+let editor: EditorState;
+
 document.getElementById('open-config').addEventListener('change', () => {
     ConfigParser.parse().then((cfg: WarsowConfig) => {
-        const editor = new EditorState(cfg);
+        editor = new EditorState(cfg);
         const input = new VirtualInput(editor);
         const bindList = new BindList(editor);
         const settingsEditor = new Settings(editor);
@@ -19,7 +22,20 @@ document.getElementById('open-config').addEventListener('change', () => {
         PaneControl.initEventListeners();
 
         document.querySelector('.main').classList.toggle('hidden');
+        document.getElementById('open-config-btn').classList.add('hidden');
+        exportBtnEl.classList.remove('hidden');
     });
+});
+
+exportBtnEl.addEventListener('click', () => {
+    const config = new Blob([editor.getConfig().generateConfig()],
+        { type: 'text/plain;charset=utf-8;' });
+
+    const url = window.URL.createObjectURL(config);
+    const tmpLinkEl = document.createElement('a');
+    tmpLinkEl.href = url;
+    tmpLinkEl.setAttribute('download', 'config.cfg');
+    tmpLinkEl.click();
 });
 
 export class PaneControl {
