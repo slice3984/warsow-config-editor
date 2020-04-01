@@ -10,6 +10,37 @@
 </head>
 
 <body>
+    <div class="modal-help hidden">
+        <div class="modal-help__content">
+            <div class="modal-help__heading">
+                <h2>Bind Editor Help</h2>
+                <div href="#" class="btn" id="close-help">Close</div>
+            </div>
+            <div class="modal-help__text">
+                <div>
+                    <h4>What is a group ?</h4>
+                    <p>Weapon selection, Chats and custom commands are grouped in 3 different groups.</p>
+                    <p>Which gives you the ability to enable / disable a specific bind part on the fly.</p>
+                </div>
+                <div>
+                    <img src="./img/active-group.png" alt="">
+                    <h4>Active Group</h4>
+                    <p>Determinates if the modification in this Group will appear in the bind.</p>
+                    <p>Example: Binding weapon lasergun on key "e" (While the group is active) will result<br>
+                        in the following bind: <b>bind e "use lasergun;"</b></p>
+                    <p>Disabling the group will result in a empty bind.</p>
+                </div>
+                <div>
+                    <img src="./img/add-bind.png" alt="">
+                    <h4>Add new - Bind multiple chats / commands to a key</h4>
+                    <p>Gives you the option to add another chat / command to a bind.</p>
+                    <p>For example you already bound the text: "Hello" to key "o"</p>
+                    <p>Now you click on "Add new", enter "World" and the bind will</p>
+                    <p>result in: bind o "say Hello;say World".</p>
+                </div>
+            </div>
+        </div>
+    </div>
     <header>
         <h1>Warsow Config Editor</h1>
         <ul>
@@ -40,6 +71,10 @@
                     </div>
                     <h1 class="keyboard-info">Click on a key to display the bind settings.</h1>
                     <div class="bind-editor hidden">
+                        <div class="bind-editor__help">
+                            <div class="text">Bind Editor</div>
+                            <div class="qm">?</div>
+                        </div>
                         <div class="bind-editor__heading">
                             Key: A
                         </div>

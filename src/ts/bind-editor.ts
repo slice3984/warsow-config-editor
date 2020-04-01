@@ -47,6 +47,10 @@ export class BindEditor implements Observer {
     private cmdBindInputEl = document.getElementById('command') as HTMLInputElement;
     private cmdGroupInputEl = document.getElementById('enable-commands') as HTMLInputElement;
 
+    private helpButtonEl = document.querySelector('.bind-editor__help') as HTMLDivElement;
+    private helpModalWrapperEl = document.querySelector('.modal-help') as HTMLDivElement;
+    private helpModalCloseButtonEl = document.getElementById('close-help') as HTMLDivElement;
+
     constructor(state: EditorState) {
         this.state = state;
         this.init();
@@ -225,6 +229,13 @@ export class BindEditor implements Observer {
             this.customCmdSelectEl.selectedIndex = this.customCmdSelectEl.options.length - 1;
             this.renderCommand(this.customCmdSelectEl.options.length);
         });
+
+        // Help
+        this.helpButtonEl.addEventListener('click', () => {
+            this.helpModalWrapperEl.classList.remove('hidden');
+        });
+
+        this.helpModalCloseButtonEl.addEventListener('click', () => this.helpModalWrapperEl.classList.add('hidden'));
     }
 
     private resetEditor() {

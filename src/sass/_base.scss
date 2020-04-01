@@ -465,6 +465,34 @@ input[type="text"] {
   background-color: $color-bg-darker;
   border-radius: 3px;
 
+  &__help {
+    display: flex;
+    user-select: none;
+    cursor: pointer;
+    padding: 0.5rem;
+    align-items: center;
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    font-weight: 700;
+    border-radius: 3px;
+    background-color: $color-bg;
+
+    &:hover {
+      background-color: darken($color-bg, 2%);
+    }
+
+    & .qm {
+      margin-left: 1rem;
+      text-align: center;
+      border-radius: 50%;
+      width: 3rem;
+      height: 3rem;
+      font-size: 2.5rem;
+      background-color: $color-primary-2;
+    }
+  }
+
   & .custom-checkbox {
     position: absolute;
     right: 1rem;
@@ -694,5 +722,56 @@ input[type="text"] {
     }
 
     width: 30rem;
+  }
+}
+
+// Bind editor help modal
+.modal-help {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 5;
+  color: $color-white;
+  background-color: rgba($color-bg, 0.9);
+
+  &__content {
+    position: absolute;
+    z-index: 10;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: $color-bg-darker;
+    padding: 1rem;
+    font-size: 1.5rem;
+    border-radius: 3px;
+  }
+
+  &__text {
+    div {
+      &:not(:last-child) {
+        margin-bottom: 2rem;
+      }
+    }
+
+    h4 {
+      margin-bottom: 0.5rem;
+    }
+
+    & p {
+      line-height: 2rem;
+    }
+  }
+
+  &__heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 3rem;
+  }
+
+  & img {
+    float: right;
   }
 }
